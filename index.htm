@@ -13,13 +13,10 @@
 <body>
     <h1>Shopping list</h1>
     <div id="app">
-        <h2>Get All etc (GET)</h2>
+        <h2>Get All (GET)</h2>
         <button id="getAllBtn" @click="getAllShoppingItems" class="btn btn-primary">See Shoppinglist</button>
-        <br><br>
-        <button id="totalPriceBtn" @click="getTotalPrice()" class="btn btn-primary">See Total Price</button>
+        <button id="totalPriceBtn" @click="getTotalPrice" class="btn-sm btn-primary">See Total Price</button>
         <div id="totalPrice" v-if="totalValue > 0">Total price: {{totalValue}}</div>
-        <div v-else></div>
-
         <table id="shoppingItemList" v-if="shoppingitems.length" class="table">
             <thead>
                 <tr>
@@ -38,9 +35,12 @@
                 </tr>
             </tbody>
         </table>
-        <div v-else>No list</div>
-
+        <br>
         <h2>Add (POST)</h2>
+        <input v-model="addData.name" placeholder="name" type="text" />
+        <input v-model.number="addData.price" placeholder="price" type="number" />
+        <input v-model.number="addData.quantity" type="number" />
+        <button @click="addShoppingItem" class="btn-sm btn-success">Add</button>
 
         <h2>Delete (DELETE)</h2>
         

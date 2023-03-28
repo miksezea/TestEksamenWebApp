@@ -4,7 +4,7 @@ Vue.createApp({
     data() {
         return {
             shoppingitems: [],
-            addData: { name: "", price: 0, quantity: 0 },
+            addData: { id: 0, name: "", price: 0, quantity: 0 },
             totalValue: 0,
             deleteId: 0,
         }
@@ -13,13 +13,18 @@ Vue.createApp({
         getAllShoppingItems() {
             this.helperGetAndShow(baseUrl)
         },
-        getTotalPrice() {
+        async getTotalPrice() {
             const url = baseUrl + "/" + "Sum"
-            totalValue = this.helperGetAndShow(url)
+            try {
+                const response = await axios.get(url)
+                this.totalValue = await response.data
+            } catch (ex) {
+                alert(ex.message)
+            }
         },
         async helperGetAndShow(url) {
             try {
-                const response = await axios.get(url, config)
+                const response = await axios.get(url)
                 this.shoppingitems = await response.data
             } catch (ex) {
                 alert(ex.message)
